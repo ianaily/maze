@@ -22,10 +22,10 @@ class PassBot(private val maze: Maze) {
 
     private fun move() {
         when {
-            availableTop(AreaType.Thread) -> botPosition.offsetX(-1)
-            availableRight(AreaType.Thread) -> botPosition.offsetY(1)
-            availableBottom(AreaType.Thread) -> botPosition.offsetX(1)
-            availableLeft(AreaType.Thread) -> botPosition.offsetY(-1)
+            availableTop(AreaType.Thread) -> botPosition.offsetY(-1)
+            availableRight(AreaType.Thread) -> botPosition.offsetX(1)
+            availableBottom(AreaType.Thread) -> botPosition.offsetY(1)
+            availableLeft(AreaType.Thread) -> botPosition.offsetX(-1)
             else -> throw DeadEndError()
         }
         maze.setAreaType(botPosition, AreaType.Pass)
@@ -37,25 +37,25 @@ class PassBot(private val maze: Maze) {
             availableBottom(AreaType.Exit) ||
             availableLeft(AreaType.Exit)
 
-    private fun availableLeft(type: AreaType) = try {
+    private fun availableTop(type: AreaType) = try {
         maze.getAreaType(botPosition.x, botPosition.y - 1) == type
     } catch (e: IndexOutOfBoundsException) {
         false
     }
 
-    private fun availableRight(type: AreaType) = try {
+    private fun availableBottom(type: AreaType) = try {
         maze.getAreaType(botPosition.x, botPosition.y + 1) == type
     } catch (e: IndexOutOfBoundsException) {
         false
     }
 
-    private fun availableTop(type: AreaType) = try {
+    private fun availableLeft(type: AreaType) = try {
         maze.getAreaType(botPosition.x - 1, botPosition.y) == type
     } catch (e: IndexOutOfBoundsException) {
         false
     }
 
-    private fun availableBottom(type: AreaType) = try {
+    private fun availableRight(type: AreaType) = try {
         maze.getAreaType(botPosition.x + 1, botPosition.y) == type
     } catch (e: IndexOutOfBoundsException) {
         false
