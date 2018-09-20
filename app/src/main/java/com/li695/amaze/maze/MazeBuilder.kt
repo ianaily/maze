@@ -80,10 +80,10 @@ class MazeBuilder(private val maze: Maze) {
 
     private fun initNextArea(current: Point, end: Point, type: AreaType) {
         when {
-            current.y > end.y -> maze.setAreaType(current.offsetY(-1), type)
-            current.y < end.y -> maze.setAreaType(current.offsetY(1), type)
-            current.x < end.x -> maze.setAreaType(current.offsetX(1), type)
-            current.x > end.x -> maze.setAreaType(current.offsetX(-1), type)
+            current.y > end.y -> maze.setAreaType(current.toTop(), type)
+            current.y < end.y -> maze.setAreaType(current.toBottom(), type)
+            current.x < end.x -> maze.setAreaType(current.toRight(), type)
+            current.x > end.x -> maze.setAreaType(current.toLeft(), type)
         }
     }
 
@@ -95,7 +95,7 @@ class MazeBuilder(private val maze: Maze) {
         val notSameBottomRight = maze.getAreaType(current.x + 1, current.y + 1) != type
         val notSameBottomLeft = maze.getAreaType(current.x - 1, current.y + 1) != type
         if (notSameBottomRight && notSameBottomLeft)
-            maze.setAreaType(current.offsetY(1), type)
+            maze.setAreaType(current.toBottom(), type)
     }
 
     private fun initTopArea(current: Point, type: AreaType) {
@@ -106,7 +106,7 @@ class MazeBuilder(private val maze: Maze) {
         val notSameTopRight = maze.getAreaType(current.x + 1, current.y - 1) != type
         val notSameTopLeft = maze.getAreaType(current.x - 1, current.y - 1) != type
         if (notSameTopRight && notSameTopLeft)
-            maze.setAreaType(current.offsetY(-1), type)
+            maze.setAreaType(current.toTop(), type)
     }
 
     private fun initLeftArea(current: Point, type: AreaType) {
@@ -117,7 +117,7 @@ class MazeBuilder(private val maze: Maze) {
         val notSameTopLeft = maze.getAreaType(current.x - 1, current.y - 1) != type
         val notSameBottomLeft = maze.getAreaType(current.x - 1, current.y + 1) != type
         if (notSameTopLeft && notSameBottomLeft)
-            maze.setAreaType(current.offsetX(-1), type)
+            maze.setAreaType(current.toLeft(), type)
     }
 
     private fun initRightArea(current: Point, type: AreaType) {
@@ -128,7 +128,7 @@ class MazeBuilder(private val maze: Maze) {
         val notSameTopRight = maze.getAreaType(current.x + 1, current.y - 1) != type
         val notSameBottomRight = maze.getAreaType(current.x + 1, current.y + 1) != type
         if (notSameTopRight && notSameBottomRight)
-            maze.setAreaType(current.offsetX(1), type)
+            maze.setAreaType(current.toRight(), type)
     }
 
     companion object {
