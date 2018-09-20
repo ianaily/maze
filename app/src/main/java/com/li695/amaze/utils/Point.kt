@@ -16,5 +16,17 @@ class Point(var x: Int, var y: Int) {
 
     fun offset(deltaX: Int, deltaY: Int) = offsetX(deltaX).offsetY(deltaY)
 
+    fun toTop() = offsetY(-1)
+    fun toRight() = offsetX(1)
+    fun toBottom() = offsetY(1)
+    fun toLeft() = offsetX(-1)
+
+    override operator fun equals(other: Any?) = when (other) {
+        other == null -> false
+        other !is Point -> false
+        else -> x == (other as Point).x && y == other.y
+    }
+
     override fun toString() = "x:$x, y:$y"
+    override fun hashCode() = 31 * x + y
 }

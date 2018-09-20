@@ -1,6 +1,6 @@
 package com.li695.amaze.utils
 
-import org.junit.Assert.assertEquals
+import org.junit.Assert.*
 import org.junit.Test
 
 class PointUnitTest {
@@ -57,6 +57,40 @@ class PointUnitTest {
         point.offset(1, 0)
         assertEquals(point.x, 11)
         assertEquals(point.y, 10)
+    }
+
+    @Test
+    fun offsetsWithDirections() {
+        val point = Point(10, 10)
+        point.toTop()
+        assertEquals(point.x, 10)
+        assertEquals(point.y, 9)
+
+        point.toRight()
+        assertEquals(point.x, 11)
+        assertEquals(point.y, 9)
+
+        point.toBottom()
+        assertEquals(point.x, 11)
+        assertEquals(point.y, 10)
+
+        point.toLeft()
+        assertEquals(point.x, 10)
+        assertEquals(point.y, 10)
+
+        point.toTop().toRight().toBottom().toLeft()
+        assertEquals(point.x, 10)
+        assertEquals(point.y, 10)
+    }
+
+    @Test
+    fun equalsIsCorrect() {
+        val pointA = Point(10, 10)
+        val pointB = Point(10, 10)
+        val pointC = Point(10, 11)
+        assertTrue(pointA == pointB)
+        assertTrue(pointA != pointC)
+        assertFalse(pointA == pointC)
     }
 
     @Test
