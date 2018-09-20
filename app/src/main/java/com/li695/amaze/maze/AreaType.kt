@@ -19,7 +19,7 @@ enum class AreaType {
     },
     Pass {
         override val isPassable: Boolean = true
-        override fun toString() = ","
+        override fun toString() = "/"
     },
     Wall {
         override val isPassable: Boolean = false
