@@ -4,7 +4,7 @@ import com.li695.amaze.utils.Point
 import java.util.*
 
 class Maze internal constructor(val width: Int, val height: Int) {
-    private val areas = ArrayList<Area>()
+    internal val areas = ArrayList<Area>()
     var enter = Point()
         internal set(value) {
             setAreaType(value.x, value.y, AreaType.Enter)
@@ -41,7 +41,7 @@ class Maze internal constructor(val width: Int, val height: Int) {
             if (it.x == 0) map += "\n"
             map += it.type
         }
-        return map
+        return map.trimIndent()
     }
 
     companion object {

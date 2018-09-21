@@ -1,5 +1,7 @@
 package com.li695.amaze.maze
 
+import com.li695.amaze.exceptions.InvalidMapError
+
 enum class AreaType {
     Way {
         override val isPassable: Boolean = true
@@ -27,4 +29,16 @@ enum class AreaType {
     };
 
     abstract val isPassable: Boolean
+
+    companion object {
+        fun from(char: String) = when (char) {
+            Way.toString() -> Way
+            Thread.toString() -> Thread
+            Enter.toString() -> Enter
+            Exit.toString() -> Exit
+            Pass.toString() -> Pass
+            Wall.toString() -> Wall
+            else -> throw InvalidMapError()
+        }
+    }
 }
