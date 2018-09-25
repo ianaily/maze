@@ -1,7 +1,7 @@
 package com.li695.amaze
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 class Splash : AppCompatActivity() {
 
