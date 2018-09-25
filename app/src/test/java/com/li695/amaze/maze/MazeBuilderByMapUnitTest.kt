@@ -34,9 +34,8 @@ class MazeBuilderByMapUnitTest {
         assertEquals(maze.exit, Point(0, 16))
         assertEquals(maze.toString(), hardMap)
     }
-}
 
-val simpleMap = """
+    private val simpleMap = """
 XXiXX
 XX XX
 XX XX
@@ -45,7 +44,7 @@ XX XX
 XXoXX
 """.trimIndent()
 
-val simpleMapWithFork = """
+    private val simpleMapWithFork = """
 XXXXXiXXXXX
 XXXXX XXXXX
 X         X
@@ -55,7 +54,7 @@ XXXXX XXXXX
 XXXXXoXXXXX
 """.trimIndent()
 
-val hardMap = """
+    private val hardMap = """
 XXXXXiXXXXXXXXXXXXXX
 X   X X   X   XX   X
 X XX    X X X XX X X
@@ -75,3 +74,4 @@ XXXXXXXXXXXXX  X  XX
 o                  X
 XXXXXXXXXXXXXXXXXXXX
 """.trimIndent()
+}

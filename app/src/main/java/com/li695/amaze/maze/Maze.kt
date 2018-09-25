@@ -3,7 +3,7 @@ package com.li695.amaze.maze
 import com.li695.amaze.utils.Point
 import java.util.*
 
-class Maze internal constructor(val width: Int, val height: Int) {
+class Maze private constructor(val width: Int, val height: Int) {
     internal val areas = ArrayList<Area>()
     var enter = Point()
         internal set(value) {
