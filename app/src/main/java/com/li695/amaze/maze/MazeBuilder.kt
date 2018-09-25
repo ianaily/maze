@@ -4,6 +4,8 @@ import com.li695.amaze.utils.Point
 import java.util.*
 
 class MazeBuilder(private val maze: Maze) {
+    private lateinit var center: Point
+
     fun generateInOutPoints(): MazeBuilder {
         val exit = generateBorderPoint()
         var enter = Point()
@@ -21,12 +23,22 @@ class MazeBuilder(private val maze: Maze) {
         return this
     }
 
+    fun generateCenterPoint(): MazeBuilder {
+        val random = Random()
+        val x = random.nextInt(maze.height - (8 % maze.height)) + (4 % maze.height)
+        val y = random.nextInt(maze.width - (8 % maze.width)) + (4 % maze.height)
+        center = Point(x, y)
+        maze.setAreaType(center, AreaType.Thread)
+        return this
+    }
+
     fun generateMainPath(): MazeBuilder {
         val enterPort = getPortPoint(maze.enter)
         val exitPort = getPortPoint(maze.exit)
         maze.setAreaType(enterPort, AreaType.Thread)
         maze.setAreaType(exitPort, AreaType.Thread)
-        generatePath(enterPort, exitPort, AreaType.Thread, calcMinMoves())
+        generatePath(enterPort, center, AreaType.Thread, calcMinMoves(enterPort, center))
+        generatePath(center, exitPort, AreaType.Thread, calcMinMoves(center, exitPort))
         return this
     }
 
@@ -54,8 +66,8 @@ class MazeBuilder(private val maze: Maze) {
         else -> Point(point)
     }
 
-    private fun calcMinMoves(): Int {
-        val minMoves = Math.abs(maze.enter.x - maze.exit.x) + Math.abs(maze.enter.y - maze.exit.y)
+    private fun calcMinMoves(fromPoint: Point, toPoint: Point): Int {
+        val minMoves = Math.abs(fromPoint.x - toPoint.x) + Math.abs(fromPoint.y - toPoint.y)
         val someVar = Random().nextInt(maze.height) + 1
         val someRule = (maze.width * (someVar / 2))
         return someRule + minMoves
@@ -136,6 +148,7 @@ class MazeBuilder(private val maze: Maze) {
             val maze = Maze.buildEmpty(width, height)
             MazeBuilder(maze).apply {
                 generateInOutPoints()
+                generateCenterPoint()
                 generateMainPath()
             }
             println(maze)
